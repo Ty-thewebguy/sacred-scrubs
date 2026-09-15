@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank you — Sacred Scrubs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="wordmark">Sacred Scrubs</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="#2F5D45" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="catalogue.html">Catalogue</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="cart.html" class="cart-link">Cart <span class="cart-count" data-cart-count>0</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="confirm-wrap">
+      <div class="confirm-icon">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#2F5D45" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h1 id="confirm-title">Thank you</h1>
+      <p id="confirm-text">We've received what you sent.</p>
+      <a href="catalogue.html" class="btn btn-primary" style="margin-top:12px;">Back to the catalogue</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Sacred Scrubs — natural hand & foot scrubs.</p>
+  </footer>
+
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    const type = getQueryParam("type");
+    if (type === "review") {
+      document.getElementById("confirm-title").textContent = "Thanks for the review";
+      document.getElementById("confirm-text").textContent = "We've received your review and will add it to the site soon.";
+      document.title = "Review received — Sacred Scrubs";
+    } else {
+      document.getElementById("confirm-title").textContent = "Order received";
+      document.getElementById("confirm-text").textContent = "Thank you — your order has been sent. We'll be in touch shortly to confirm payment and delivery details.";
+      document.title = "Order received — Sacred Scrubs";
+    }
+  </script>
+</body>
+</html>

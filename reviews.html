@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reviews — Sacred Scrubs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="wordmark">Sacred Scrubs</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="#2F5D45" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="catalogue.html">Catalogue</a></li>
+        <li><a href="reviews.html" class="active">Reviews</a></li>
+        <li><a href="cart.html" class="cart-link">Cart <span class="cart-count" data-cart-count>0</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <div class="section-heading">
+          <h1 style="font-size:clamp(1.8rem,3vw,2.6rem);">What people are saying</h1>
+          <p>Real feedback from people who've used Sacred Scrubs.</p>
+        </div>
+        <div class="review-grid" id="review-grid"></div>
+      </div>
+    </section>
+
+    <section class="section" style="background:var(--green-pale); border-radius:32px; margin:0 24px 64px; padding:56px 24px;">
+      <div class="container" style="max-width:640px;">
+        <h2 style="text-align:center;">Leave a review</h2>
+        <p style="text-align:center; margin:0 auto 30px;">Tried a scrub? Let us know how it went — reviews are read before being added to the site.</p>
+        <form id="review-form">
+          <div class="form-field full">
+            <label for="rname">Your name</label>
+            <input type="text" id="rname" name="name" required />
+          </div>
+          <div class="form-field full">
+            <label for="rrating">Rating</label>
+            <select id="rrating" name="rating" required>
+              <option value="5">5 — Excellent</option>
+              <option value="4">4 — Good</option>
+              <option value="3">3 — Okay</option>
+              <option value="2">2 — Not great</option>
+              <option value="1">1 — Poor</option>
+            </select>
+          </div>
+          <div class="form-field full">
+            <label for="rtext">Your review</label>
+            <textarea id="rtext" name="review" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;" id="review-submit-btn">Send review</button>
+          <p id="review-error" style="color:#B23B3B; display:none; margin-top:12px;">Something went wrong sending your review. Please try again.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Sacred Scrubs — natural hand & foot scrubs.</p>
+  </footer>
+
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    async function renderReviews() {
+      const grid = document.getElementById("review-grid");
+      try {
+        const res = await fetch("data/reviews.json");
+        const reviews = await res.json();
+        grid.innerHTML = reviews.map(r => `
+          <div class="review-card">
+            <div class="review-stars">${"★".repeat(r.rating)}${"☆".repeat(5 - r.rating)}</div>
+            <p>${r.text}</p>
+            <div class="review-name">${r.name}</div>
+          </div>
+        `).join("");
+      } catch (e) {
+        grid.innerHTML = "<p>Reviews couldn't be loaded right now.</p>";
+      }
+    }
+    renderReviews();
+
+    document.getElementById("review-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const btn = document.getElementById("review-submit-btn");
+      const errorEl = document.getElementById("review-error");
+      btn.disabled = true;
+      btn.textContent = "Sending…";
+      errorEl.style.display = "none";
+      try {
+        const config = await loadConfig();
+        const res = await fetch(config.formEndpoints.reviews, {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: new FormData(form)
+        });
+        if (res.ok) {
+          window.location.href = "thankyou.html?type=review";
+        } else {
+          throw new Error("Review submission failed");
+        }
+      } catch (err) {
+        errorEl.style.display = "block";
+        btn.disabled = false;
+        btn.textContent = "Send review";
+      }
+    });
+  </script>
+</body>
+</html>

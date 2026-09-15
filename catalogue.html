@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catalogue — Sacred Scrubs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="wordmark">Sacred Scrubs</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="#2F5D45" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="catalogue.html" class="active">Catalogue</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="cart.html" class="cart-link">Cart <span class="cart-count" data-cart-count>0</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="section" style="padding-bottom: 20px;">
+      <div class="container">
+        <div class="section-heading" style="margin-bottom:32px;">
+          <h1 style="font-size:clamp(1.8rem,3vw,2.6rem);">The full range</h1>
+          <p>Every scrub is available in your choice of flavour, size, and a hand or foot formula.</p>
+        </div>
+        <div class="product-grid" id="product-grid">
+          <!-- Product cards are injected here by catalogue.js -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Sacred Scrubs — natural hand & foot scrubs.</p>
+    <p><a href="reviews.html">Leave a review</a></p>
+  </footer>
+
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    async function renderCatalogue() {
+      const grid = document.getElementById("product-grid");
+      try {
+        const products = await loadProducts();
+        grid.innerHTML = products.map(p => {
+          const stock = stockLabel(p.stock);
+          return `
+            <a class="product-card" href="product.html?id=${p.id}">
+              <div class="product-card-media">
+                <span class="stock-pill ${stock.cls}">${stock.text}</span>
+                <img src="${p.image}" alt="${p.name}" />
+              </div>
+              <div class="product-card-body">
+                <h3>${p.name}</h3>
+                <p>${p.description}</p>
+                <div class="product-price">From ${formatPrice(p.basePrice)}</div>
+              </div>
+            </a>
+          `;
+        }).join("");
+      } catch (e) {
+        grid.innerHTML = "<p>Couldn't load the catalogue right now. Please refresh the page.</p>";
+      }
+    }
+    renderCatalogue();
+  </script>
+</body>
+</html>

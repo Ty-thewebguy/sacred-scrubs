@@ -1,0 +1,11 @@
+{
+  "flavors": ["Strawberry", "Kiwi", "Coconut", "Lavender", "Rose", "Vanilla", "Green Tea", "Citrus"],
+  "sizes": ["100g", "250g"],
+  "applications": ["Hand", "Foot"],
+  "formEndpoints": {
+    "orders": "https://formspree.io/f/xzezpenw",
+    "reviews": "https://formspree.io/f/xjykbyno"
+  },
+  "businessName": "Sacred Scrubs",
+  "businessTagline": "Small-batch natural scrubs for hands and feet"
+}

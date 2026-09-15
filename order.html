@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Complete your order — Sacred Scrubs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="wordmark">Sacred Scrubs</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="#2F5D45" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="catalogue.html">Catalogue</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="cart.html" class="cart-link">Cart <span class="cart-count" data-cart-count>0</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <h1 style="font-size:clamp(1.8rem,3vw,2.6rem);">Complete your order</h1>
+        <div id="order-root"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Sacred Scrubs — natural hand & foot scrubs.</p>
+  </footer>
+
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    let config;
+
+    async function init() {
+      config = await loadConfig();
+      const cart = getCart();
+      const root = document.getElementById("order-root");
+
+      if (cart.length === 0) {
+        root.innerHTML = `
+          <div class="empty-state">
+            <p>Your cart is empty, so there's nothing to order yet.</p>
+            <a href="catalogue.html" class="btn btn-primary">Browse the catalogue</a>
+          </div>
+        `;
+        return;
+      }
+
+      root.innerHTML = `
+        <div class="order-layout">
+          <form id="order-form">
+            <div class="form-field full">
+              <label for="name">Full name</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+
+            <div class="form-field full">
+              <label for="address">Delivery / collection address</label>
+              <textarea id="address" name="address" rows="3" required></textarea>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" />
+              </div>
+              <div class="form-field">
+                <label for="phone">Phone number</label>
+                <input type="tel" id="phone" name="phone" />
+              </div>
+            </div>
+            <p style="margin-top:-10px; color:var(--text-muted); font-size:0.88rem;">Please provide at least one way to reach you.</p>
+
+            <div class="form-field full">
+              <label>Payment method</label>
+              <div class="radio-row">
+                <label class="radio-option"><input type="radio" name="payment" value="EFT" checked /> EFT</label>
+                <label class="radio-option"><input type="radio" name="payment" value="Cash" /> Cash</label>
+              </div>
+            </div>
+
+            <div class="form-field full">
+              <label for="notes">Order notes (optional)</label>
+              <textarea id="notes" name="notes" rows="2"></textarea>
+            </div>
+
+            <input type="hidden" name="order_summary" id="order_summary" />
+            <input type="hidden" name="order_total" id="order_total" />
+
+            <button type="submit" class="btn btn-primary" style="width:100%;" id="submit-btn">Send order</button>
+            <p id="form-error" style="color:#B23B3B; display:none; margin-top:12px;">Something went wrong sending your order. Please try again, or contact us directly.</p>
+          </form>
+
+          <div class="order-summary-card">
+            <h3>Order summary</h3>
+            ${cart.map(item => `
+              <div class="order-summary-line">
+                <span>${item.name} (${item.flavor}, ${item.size}, ${item.application}) × ${item.qty}</span>
+                <span>${formatPrice(item.qty * item.unitPrice)}</span>
+              </div>
+            `).join("")}
+            <div class="order-summary-total"><span>Total</span><span>${formatPrice(cartTotal())}</span></div>
+          </div>
+        </div>
+      `;
+
+      const cartLines = cart.map(item =>
+        `${item.name} (${item.flavor}, ${item.size}, ${item.application}) x${item.qty} — ${formatPrice(item.qty * item.unitPrice)}`
+      ).join("\n");
+      document.getElementById("order_summary").value = cartLines;
+      document.getElementById("order_total").value = formatPrice(cartTotal());
+
+      document.getElementById("order-form").addEventListener("submit", handleSubmit);
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const email = form.email.value.trim();
+      const phone = form.phone.value.trim();
+      const errorEl = document.getElementById("form-error");
+
+      if (!email && !phone) {
+        errorEl.textContent = "Please provide an email or phone number so we can reach you.";
+        errorEl.style.display = "block";
+        return;
+      }
+
+      const submitBtn = document.getElementById("submit-btn");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending…";
+      errorEl.style.display = "none";
+
+      try {
+        const res = await fetch(config.formEndpoints.orders, {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: new FormData(form)
+        });
+        if (res.ok) {
+          clearCart();
+          window.location.href = "thankyou.html?type=order";
+        } else {
+          throw new Error("Form submission failed");
+        }
+      } catch (err) {
+        errorEl.textContent = "Something went wrong sending your order. Please try again, or contact us directly.";
+        errorEl.style.display = "block";
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Send order";
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>

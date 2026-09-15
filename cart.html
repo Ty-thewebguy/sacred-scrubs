@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your cart — Sacred Scrubs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="wordmark">Sacred Scrubs</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="#2F5D45" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="catalogue.html">Catalogue</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="cart.html" class="cart-link active">Cart <span class="cart-count" data-cart-count>0</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <h1 style="font-size:clamp(1.8rem,3vw,2.6rem);">Your cart</h1>
+        <div id="cart-root"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Sacred Scrubs — natural hand & foot scrubs.</p>
+    <p><a href="reviews.html">Leave a review</a></p>
+  </footer>
+
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    function renderCart() {
+      const cart = getCart();
+      const root = document.getElementById("cart-root");
+
+      if (cart.length === 0) {
+        root.innerHTML = `
+          <div class="empty-state">
+            <p>Your cart is empty.</p>
+            <a href="catalogue.html" class="btn btn-primary">Browse the catalogue</a>
+          </div>
+        `;
+        return;
+      }
+
+      root.innerHTML = `
+        <div>
+          ${cart.map((item, i) => `
+            <div class="cart-row">
+              <img src="${item.image}" alt="${item.name}" />
+              <div>
+                <div class="cart-row-name">${item.name}</div>
+                <div class="cart-row-meta">${item.flavor} · ${item.size} · ${item.application}</div>
+                <button class="remove-link" data-remove="${i}">Remove</button>
+              </div>
+              <div class="cart-row-qty">
+                <div class="qty-row" style="margin-bottom:0;">
+                  <button class="qty-btn" data-minus="${i}" aria-label="Decrease quantity">−</button>
+                  <span class="qty-value">${item.qty}</span>
+                  <button class="qty-btn" data-plus="${i}" aria-label="Increase quantity">+</button>
+                </div>
+              </div>
+              <div class="cart-row-total" style="font-weight:700;">${formatPrice(item.qty * item.unitPrice)}</div>
+            </div>
+          `).join("")}
+        </div>
+        <div class="cart-summary">
+          <div class="cart-summary-row"><span>Total</span><span>${formatPrice(cartTotal())}</span></div>
+          <a href="order.html" class="btn btn-primary" style="width:100%;">Proceed to order</a>
+        </div>
+      `;
+
+      root.querySelectorAll("[data-remove]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          removeFromCart(Number(btn.dataset.remove));
+          renderCart();
+        });
+      });
+      root.querySelectorAll("[data-minus]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const i = Number(btn.dataset.minus);
+          const cart = getCart();
+          updateCartQty(i, cart[i].qty - 1);
+          renderCart();
+        });
+      });
+      root.querySelectorAll("[data-plus]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const i = Number(btn.dataset.plus);
+          const cart = getCart();
+          updateCartQty(i, cart[i].qty + 1);
+          renderCart();
+        });
+      });
+    }
+
+    renderCart();
+  </script>
+</body>
+</html>
