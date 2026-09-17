@@ -24,7 +24,7 @@
     "image": "images/Orange.jpg",
     "basePrice": 150,
     "sizeUpcharge": 0,
-    "stock": 0
+    "stock": 11
   },
   {
     "id": "Peppermint",
@@ -39,7 +39,7 @@
     "id": "Coconut oil lotion",
     "name": "Coconut oil lotion",
     "description": "Only natural, highly moisturising coconut oil, smelling feeling and living luxury.",
-    "image": "images/charcoal.svg",
+    "image": "images/coconut.jpg",
     "basePrice": 45,
     "sizeUpcharge": 0,
     "stock": 6
