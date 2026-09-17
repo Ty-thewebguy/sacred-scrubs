@@ -1,7 +1,7 @@
 {
   "flavors": ["current"],
   "sizes": ["250ml"],
-  "applications": ["Hand", "Foot"],
+  "applications": ["Hand", "Foot", "Both"],
   "formEndpoints": {
     "orders": "https://formspree.io/f/xzezpenw",
     "reviews": "https://formspree.io/f/xjykbyno"
