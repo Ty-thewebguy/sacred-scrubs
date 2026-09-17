@@ -1,21 +1,23 @@
 [
   {
     "id": "Lemon",
-    "name": "Lemon Scrub",
+    "name": "Lemon hand Scrub",
     "description": "Pure lemon straight from the fruit ,straight from the peel. Raw sugar crunch. Bright ,Gritty & Fresh.",
     "image": "images/Lemon.jpg",
     "basePrice": 150,
     "sizeUpcharge": 0,
     "stock": 14
+    "hasApplication": false
   },
   {
     "id": "Rosemary",
-    "name": "Rosemary Scrub",
+    "name": "Rosemary hand Scrub",
     "description": "Natural extract & natural cocnut oil ,straight from the source.",
     "image": "images/Rosemary.jpg",
     "basePrice": 150,
     "sizeUpcharge": 0,
     "stock": 9
+    "hasApplication": false
   },
   {
   "id": "himalayan-salt-foot-scrub",
@@ -25,24 +27,27 @@
   "basePrice": 150,
   "sizeUpcharge": "0",
   "stock": 10
+  "hasApplication": false
 },
   {
     "id": "Orange",
-    "name": "Sweet Orange Scrub",
+    "name": "Sweet Orange hand Scrub",
     "description": "Straight from the fruit with a sugar bite to it , Warm and juicy with a glow.",
     "image": "images/Orange.jpg",
     "basePrice": 150,
     "sizeUpcharge": 0,
     "stock": 11
+    "hasApplication": false
   },
   {
     "id": "Peppermint",
-    "name": "Peppermint Scrub",
+    "name": "Peppermint hand Scrub",
     "description": "Sharp & icy, like cracking fresh leaves. Cold scent that lingers.",
     "image": "images/Peppermint.jpg",
     "basePrice": 150,
     "sizeUpcharge": 0,
     "stock": 21
+    "hasApplication": false
   },
   {
     "id": "Coconut oil lotion",
@@ -52,5 +57,6 @@
     "basePrice": 45,
     "sizeUpcharge": 0,
     "stock": 6
+    "hasApplication": false
   }
 ]
