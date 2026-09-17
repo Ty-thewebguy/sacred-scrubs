@@ -23,7 +23,7 @@
   "description": "An all-natural exfoliating scrub with Himalayan salt, made for feet, available in four fragrances.",
   "image": "images/himalayan-salt-foot-scrub.svg",
   "basePrice": 150,
-  "sizeUpcharge": "250ml",
+  "sizeUpcharge": "0",
   "stock": 10
 },
   {
