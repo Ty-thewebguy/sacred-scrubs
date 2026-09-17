@@ -2,7 +2,7 @@
   {
     "id": "Lemon",
     "name": "Lemon Scrub",
-    "description": "A soft, fine-grain sugar base that melts against warm skin. Gentle enough for daily use, made to leave skin smooth without stripping it.",
+    "description": "Pure lemon straight from the fruit ,straight from the peel. Raw sugar crunch. Bright ,Gritty & Fresh.",
     "image": "images/Lemon.jpg",
     "basePrice": 150,
     "sizeUpcharge": 0,
@@ -11,7 +11,7 @@
   {
     "id": "Rosemary",
     "name": "Rosemary Scrub",
-    "description": "A coarser mineral-rich salt blend for deeper exfoliation. Best for elbows, heels, and anywhere that needs a little more attention.",
+    "description": "Natural extract & natural cocnut oil ,straight from the source.",
     "image": "images/Rosemary.jpg",
     "basePrice": 150,
     "sizeUpcharge": 0,
@@ -20,7 +20,7 @@
   {
     "id": "Orange",
     "name": "Sweet Orange Scrub",
-    "description": "Ground coffee and natural oils in one invigorating blend, made for mornings that need a little help getting started.",
+    "description": "Straight from the fruit with a sugar bite to it , Warm and juicy with a glow.",
     "image": "images/Orange.jpg",
     "basePrice": 150,
     "sizeUpcharge": 0,
@@ -29,16 +29,16 @@
   {
     "id": "Peppermint",
     "name": "Peppermint Scrub",
-    "description": "A creamy, hydrating scrub built around coconut milk, for skin that wants softness more than intensity.",
+    "description": "Sharp & icy, like cracking fresh leaves. Cold scent that lingers.",
     "image": "images/Peppermint.jpg",
-    "basePrice": 195,
+    "basePrice": 150,
     "sizeUpcharge": 0,
     "stock": 21
   },
   {
     "id": "Coconut oil lotion",
     "name": "Coconut oil lotion",
-    "description": "Activated charcoal to draw out impurities, paired with a light natural oil base so skin isn't left feeling tight.",
+    "description": "Only natural, highly moisturising coconut oil, smelling feeling and living luxury.",
     "image": "images/charcoal.svg",
     "basePrice": 45,
     "sizeUpcharge": 0,
