@@ -1,6 +1,6 @@
 [
   {
-    "id": "Lemon Scrub",
+    "id": "Lemon",
     "name": "Lemon Scrub",
     "description": "A soft, fine-grain sugar base that melts against warm skin. Gentle enough for daily use, made to leave skin smooth without stripping it.",
     "image": "images/sugar.svg",
@@ -9,7 +9,7 @@
     "stock": 14
   },
   {
-    "id": "Rosemary Scrub",
+    "id": "Rosemary",
     "name": "Rosemary Scrub",
     "description": "A coarser mineral-rich salt blend for deeper exfoliation. Best for elbows, heels, and anywhere that needs a little more attention.",
     "image": "images/sea-salt.svg",
@@ -18,7 +18,7 @@
     "stock": 9
   },
   {
-    "id": "Sweet Orange Scrub",
+    "id": "Orange",
     "name": "Sweet Orange Scrub",
     "description": "Ground coffee and natural oils in one invigorating blend, made for mornings that need a little help getting started.",
     "image": "images/coffee.svg",
@@ -27,7 +27,7 @@
     "stock": 0
   },
   {
-    "id": "Peppermint Scrub",
+    "id": "Peppermint",
     "name": "Peppermint Scrub",
     "description": "A creamy, hydrating scrub built around coconut milk, for skin that wants softness more than intensity.",
     "image": "images/coconut-milk.svg",
