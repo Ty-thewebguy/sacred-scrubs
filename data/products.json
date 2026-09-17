@@ -5,7 +5,7 @@
     "description": "A soft, fine-grain sugar base that melts against warm skin. Gentle enough for daily use, made to leave skin smooth without stripping it.",
     "image": "images/Lemon.jpg",
     "basePrice": 150,
-    "sizeUpcharge": 60,
+    "sizeUpcharge": 0,
     "stock": 14
   },
   {
@@ -14,7 +14,7 @@
     "description": "A coarser mineral-rich salt blend for deeper exfoliation. Best for elbows, heels, and anywhere that needs a little more attention.",
     "image": "images/Rosemary.jpg",
     "basePrice": 150,
-    "sizeUpcharge": 60,
+    "sizeUpcharge": 0,
     "stock": 9
   },
   {
@@ -23,7 +23,7 @@
     "description": "Ground coffee and natural oils in one invigorating blend, made for mornings that need a little help getting started.",
     "image": "images/Orange.jpg",
     "basePrice": 150,
-    "sizeUpcharge": 60,
+    "sizeUpcharge": 0,
     "stock": 0
   },
   {
@@ -32,7 +32,7 @@
     "description": "A creamy, hydrating scrub built around coconut milk, for skin that wants softness more than intensity.",
     "image": "images/Peppermint.jpg",
     "basePrice": 195,
-    "sizeUpcharge": 60,
+    "sizeUpcharge": 0,
     "stock": 21
   },
   {
@@ -41,7 +41,7 @@
     "description": "Activated charcoal to draw out impurities, paired with a light natural oil base so skin isn't left feeling tight.",
     "image": "images/charcoal.svg",
     "basePrice": 45,
-    "sizeUpcharge": 65,
+    "sizeUpcharge": 0,
     "stock": 6
   }
 ]
