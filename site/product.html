@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sacred Scrubs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="wordmark">Sacred Scrubs</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="#2F5D45" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="catalogue.html" class="active">Catalogue</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="cart.html" class="cart-link">Cart <span class="cart-count" data-cart-count>0</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <div id="product-root">Loading…</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Sacred Scrubs — natural hand & foot scrubs.</p>
+    <p><a href="reviews.html">Leave a review</a></p>
+  </footer>
+
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    let product, config;
+    let selected = { fragrance: null, application: null, qty: 1 };
+
+    async function init() {
+      const id = getQueryParam("id");
+      const root = document.getElementById("product-root");
+      try {
+        const [products, cfg] = await Promise.all([loadProducts(), loadConfig()]);
+        config = cfg;
+        product = products.find(p => p.id === id);
+        if (!product) {
+          root.innerHTML = "<p>We couldn't find that product. <a href='catalogue.html'>Back to the catalogue</a>.</p>";
+          return;
+        }
+        if (product.hasFragrance) selected.fragrance = config.fragrances[0];
+        if (product.hasApplication) selected.application = config.applications[0];
+        document.title = product.name + " — Sacred Scrubs";
+        render();
+      } catch (e) {
+        root.innerHTML = "<p>Something went wrong loading this product. Please refresh.</p>";
+      }
+    }
+
+    function pillGroup(name, options, current) {
+      return `
+        <div class="option-pills" data-group="${name}">
+          ${options.map(opt => `
+            <button type="button" class="option-pill ${opt === current ? "selected" : ""}" data-value="${opt}">${opt}</button>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function render() {
+      const root = document.getElementById("product-root");
+      const stock = stockLabel(product.stock);
+      const outOfStock = product.stock <= 0;
+
+      root.innerHTML = `
+        <div class="product-detail">
+          <div class="product-detail-media">
+            <img src="${product.image}" alt="${product.name}" />
+          </div>
+          <div>
+            <h1>${product.name}</h1>
+            <p>${product.description}</p>
+
+            ${product.hasFragrance ? `
+              <div class="option-group">
+                <label>Fragrance</label>
+                ${pillGroup("fragrance", config.fragrances, selected.fragrance)}
+              </div>
+            ` : ""}
+
+            <div class="option-group">
+              <label>Size</label>
+              <p style="margin:0; color:var(--text-muted); font-weight:600;">${product.size}</p>
+            </div>
+
+            ${product.hasApplication ? `
+              <div class="option-group">
+                <label>Hand or foot</label>
+                ${pillGroup("application", config.applications, selected.application)}
+              </div>
+            ` : ""}
+
+            <div class="qty-row">
+              <button class="qty-btn" id="qty-minus" aria-label="Decrease quantity">−</button>
+              <span class="qty-value" id="qty-value">${selected.qty}</span>
+              <button class="qty-btn" id="qty-plus" aria-label="Increase quantity">+</button>
+            </div>
+
+            <div class="detail-price">${formatPrice(product.price)}</div>
+            <p class="stock-note ${stock.cls === "out" ? "out" : ""}">${stock.text}</p>
+
+            <button class="btn btn-primary" id="add-to-cart" ${outOfStock ? "disabled" : ""}>
+              ${outOfStock ? "Out of stock" : "Add to cart"}
+            </button>
+            <p id="added-msg" style="color:#2FA267; font-weight:700; margin-top:14px; display:none;">Added to your cart.</p>
+          </div>
+        </div>
+      `;
+
+      root.querySelectorAll(".option-pills").forEach(group => {
+        const name = group.dataset.group;
+        group.querySelectorAll(".option-pill").forEach(btn => {
+          btn.addEventListener("click", () => {
+            selected[name] = btn.dataset.value;
+            render();
+          });
+        });
+      });
+
+      document.getElementById("qty-minus").addEventListener("click", () => {
+        selected.qty = Math.max(1, selected.qty - 1);
+        render();
+      });
+      document.getElementById("qty-plus").addEventListener("click", () => {
+        selected.qty += 1;
+        render();
+      });
+
+      const addBtn = document.getElementById("add-to-cart");
+      if (addBtn) {
+        addBtn.addEventListener("click", () => {
+          addToCart({
+            productId: product.id,
+            name: product.name,
+            fragrance: selected.fragrance || null,
+            size: product.size,
+            application: selected.application || null,
+            unitPrice: product.price,
+            qty: selected.qty,
+            image: product.image
+          });
+          document.getElementById("added-msg").style.display = "block";
+        });
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "fragrances": ["Lemon", "Rosemary", "Sweet Orange", "Peppermint"],
+  "formEndpoints": {
+    "orders": "https://formspree.io/f/xzezpenw",
+    "reviews": "https://formspree.io/f/xjykbyno"
+  },
+  "businessName": "Sacred Scrubs",
+  "businessTagline": "Natural scrubs for hands and feet"
+}

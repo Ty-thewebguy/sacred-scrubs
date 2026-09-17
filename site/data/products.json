@@ -1,0 +1,35 @@
+[
+  {
+    "id": "hand-scrub",
+    "name": "Hand Scrub",
+    "description": "An all-natural exfoliating scrub made for hands, available in four fragrances.",
+    "image": "images/hand-scrub.svg",
+    "price": 150,
+    "size": "250ml",
+    "hasFragrance": true,
+    "hasApplication": false,
+    "stock": 14
+  },
+  {
+    "id": "foot-scrub",
+    "name": "Foot Scrub",
+    "description": "An all-natural exfoliating scrub made for feet, available in four fragrances.",
+    "image": "images/foot-scrub.svg",
+    "price": 150,
+    "size": "250ml",
+    "hasFragrance": true,
+    "hasApplication": false,
+    "stock": 12
+  },
+  {
+    "id": "coconut-lotion",
+    "name": "Coconut Oil Lotion",
+    "description": "A lightweight, all-natural coconut oil lotion for everyday use.",
+    "image": "images/coconut-lotion.svg",
+    "price": 45,
+    "size": "100ml",
+    "hasFragrance": false,
+    "hasApplication": false,
+    "stock": 20
+  }
+]
