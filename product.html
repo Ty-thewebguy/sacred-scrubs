@@ -43,7 +43,7 @@
   <script src="js/main.js"></script>
   <script>
     let product, config;
-    let selected = { flavor: null, size: null, application: null, qty: 1 };
+    let selected = { size: null, application: null, qty: 1 };
 
     async function init() {
       const id = getQueryParam("id");
@@ -56,9 +56,8 @@
           root.innerHTML = "<p>We couldn't find that product. <a href='catalogue.html'>Back to the catalogue</a>.</p>";
           return;
         }
-        selected.flavor = config.flavors[0];
-        selected.size = config.sizes[0];
-        selected.application = config.applications[0];
+        selected.size = product.hasSizeOptions ? config.sizes[0] : product.size;
+        selected.application = product.hasApplication ? config.applications[0] : null;
         document.title = product.name + " — Sacred Scrubs";
         render();
       } catch (e) {
@@ -67,8 +66,7 @@
     }
 
     function unitPrice() {
-      const sizeIndex = config.sizes.indexOf(selected.size);
-      return product.basePrice + (sizeIndex > 0 ? product.sizeUpcharge * sizeIndex : 0);
+      return product.basePrice + (product.sizeUpcharge || 0);
     }
 
     function pillGroup(name, options, current) {
@@ -96,18 +94,19 @@
             <p>${product.description}</p>
 
             <div class="option-group">
-              <label>Flavour</label>
-              ${pillGroup("flavor", config.flavors, selected.flavor)}
-            </div>
-
-            <div class="option-group">
               <label>Size</label>
-              ${pillGroup("size", config.sizes, selected.size)}
+              ${product.hasSizeOptions
+                ? pillGroup("size", config.sizes, selected.size)
+                : `<p style="margin:0; color:var(--text-muted); font-weight:600;">${product.size}</p>`
+              }
             </div>
 
             <div class="option-group">
               <label>Hand or foot</label>
-              ${pillGroup("application", config.applications, selected.application)}
+              ${product.hasApplication
+                ? pillGroup("application", config.applications, selected.application)
+                : `<p style="margin:0; color:var(--text-muted); font-size:0.9rem;">No other options available for this product.</p>`
+              }
             </div>
 
             <div class="qty-row">
@@ -152,9 +151,8 @@
           addToCart({
             productId: product.id,
             name: product.name,
-            flavor: selected.flavor,
-            size: selected.size,
-            application: selected.application,
+            size: product.hasSizeOptions ? selected.size : product.size,
+            application: product.hasApplication ? selected.application : null,
             unitPrice: unitPrice(),
             qty: selected.qty,
             image: product.image
