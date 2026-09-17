@@ -1,5 +1,6 @@
 [
 {
+  { 
   "applications": ["Hand", "Foot"],
   "formEndpoints": {
     "orders": "https://formspree.io/f/xzezpenw",
