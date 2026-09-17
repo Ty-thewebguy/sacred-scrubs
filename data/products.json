@@ -6,7 +6,10 @@
     "image": "images/Lemon.jpg",
     "basePrice": 150,
     "sizeUpcharge": 0,
-    "stock": 14
+    "stock": 14,
+    "size": "250ml",
+    "hasSizeOptions": false,
+    "hasApplication": false
   },
   {
     "id": "Rosemary",
@@ -15,17 +18,23 @@
     "image": "images/Rosemary.jpg",
     "basePrice": 150,
     "sizeUpcharge": 0,
-    "stock": 9
+    "stock": 9,
+    "size": "250ml",
+    "hasSizeOptions": false,
+    "hasApplication": false
   },
   {
-  "id": "himalayan-salt-foot-scrub",
-  "name": "Himalayan Salt Foot Scrub",
-  "description": "An all-natural exfoliating scrub with Himalayan salt, made for feet, available in four fragrances.",
-  "image": "images/himalayan-salt-foot-scrub.svg",
-  "basePrice": 150,
-  "sizeUpcharge": "0",
-  "stock": 10
-},
+    "id": "himalayan-salt-foot-scrub",
+    "name": "Himalayan Salt Foot Scrub",
+    "description": "An all-natural exfoliating scrub with Himalayan salt, made for feet, available in four fragrances.",
+    "image": "images/himalayan-salt-foot-scrub.svg",
+    "basePrice": 150,
+    "sizeUpcharge": 0,
+    "stock": 10,
+    "size": "250ml",
+    "hasSizeOptions": false,
+    "hasApplication": false
+  },
   {
     "id": "Orange",
     "name": "Sweet Orange hand Scrub",
@@ -33,7 +42,10 @@
     "image": "images/Orange.jpg",
     "basePrice": 150,
     "sizeUpcharge": 0,
-    "stock": 11
+    "stock": 11,
+    "size": "250ml",
+    "hasSizeOptions": false,
+    "hasApplication": false
   },
   {
     "id": "Peppermint",
@@ -42,7 +54,10 @@
     "image": "images/Peppermint.jpg",
     "basePrice": 150,
     "sizeUpcharge": 0,
-    "stock": 21
+    "stock": 21,
+    "size": "250ml",
+    "hasSizeOptions": false,
+    "hasApplication": false
   },
   {
     "id": "Coconut oil lotion",
@@ -51,7 +66,9 @@
     "image": "images/coconut.jpg",
     "basePrice": 45,
     "sizeUpcharge": 0,
-    "stock": 6
-
+    "stock": 6,
+    "size": "100ml",
+    "hasSizeOptions": false,
+    "hasApplication": false
   }
 ]
