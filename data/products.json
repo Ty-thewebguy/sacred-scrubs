@@ -7,7 +7,6 @@
     "basePrice": 150,
     "sizeUpcharge": 0,
     "stock": 14
-    "hasApplication": false
   },
   {
     "id": "Rosemary",
@@ -17,7 +16,6 @@
     "basePrice": 150,
     "sizeUpcharge": 0,
     "stock": 9
-    "hasApplication": false
   },
   {
   "id": "himalayan-salt-foot-scrub",
@@ -27,7 +25,6 @@
   "basePrice": 150,
   "sizeUpcharge": "0",
   "stock": 10
-  "hasApplication": false
 },
   {
     "id": "Orange",
@@ -37,7 +34,6 @@
     "basePrice": 150,
     "sizeUpcharge": 0,
     "stock": 11
-    "hasApplication": false
   },
   {
     "id": "Peppermint",
@@ -47,7 +43,6 @@
     "basePrice": 150,
     "sizeUpcharge": 0,
     "stock": 21
-    "hasApplication": false
   },
   {
     "id": "Coconut oil lotion",
@@ -57,6 +52,6 @@
     "basePrice": 45,
     "sizeUpcharge": 0,
     "stock": 6
-    "hasApplication": false
+
   }
 ]
