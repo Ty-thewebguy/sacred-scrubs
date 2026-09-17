@@ -18,6 +18,15 @@
     "stock": 9
   },
   {
+  "id": "himalayan-salt-foot-scrub",
+  "name": "Himalayan Salt Foot Scrub",
+  "description": "An all-natural exfoliating scrub with Himalayan salt, made for feet, available in four fragrances.",
+  "image": "images/himalayan-salt-foot-scrub.svg",
+  "basePrice": 150,
+  "sizeUpcharge": "250ml",
+  "stock": 10
+},
+  {
     "id": "Orange",
     "name": "Sweet Orange Scrub",
     "description": "Straight from the fruit with a sugar bite to it , Warm and juicy with a glow.",
