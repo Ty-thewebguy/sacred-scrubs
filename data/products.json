@@ -1,34 +1,34 @@
 [
   {
-    "id": "sugar",
-    "name": "Sugar Body Scrub",
+    "id": "Lemon Scrub",
+    "name": "Lemon Scrub",
     "description": "A soft, fine-grain sugar base that melts against warm skin. Gentle enough for daily use, made to leave skin smooth without stripping it.",
     "image": "images/sugar.svg",
-    "basePrice": 180,
+    "basePrice": 150,
     "sizeUpcharge": 60,
     "stock": 14
   },
   {
-    "id": "sea-salt",
-    "name": "Sea Salt Body Scrub",
+    "id": "Rosemary Scrub",
+    "name": "Rosemary Scrub",
     "description": "A coarser mineral-rich salt blend for deeper exfoliation. Best for elbows, heels, and anywhere that needs a little more attention.",
     "image": "images/sea-salt.svg",
-    "basePrice": 195,
+    "basePrice": 150,
     "sizeUpcharge": 60,
     "stock": 9
   },
   {
-    "id": "coffee",
-    "name": "Coffee Energising Scrub",
+    "id": "Sweet Orange Scrub",
+    "name": "Sweet Orange Scrub",
     "description": "Ground coffee and natural oils in one invigorating blend, made for mornings that need a little help getting started.",
     "image": "images/coffee.svg",
-    "basePrice": 190,
+    "basePrice": 150,
     "sizeUpcharge": 60,
     "stock": 0
   },
   {
-    "id": "coconut-milk",
-    "name": "Coconut Milk Scrub",
+    "id": "Peppermint Scrub",
+    "name": "Peppermint Scrub",
     "description": "A creamy, hydrating scrub built around coconut milk, for skin that wants softness more than intensity.",
     "image": "images/coconut-milk.svg",
     "basePrice": 195,
@@ -36,21 +36,13 @@
     "stock": 21
   },
   {
-    "id": "charcoal",
-    "name": "Charcoal Detox Scrub",
+    "id": "Coconut oil lotion",
+    "name": "Coconut oil lotion",
     "description": "Activated charcoal to draw out impurities, paired with a light natural oil base so skin isn't left feeling tight.",
     "image": "images/charcoal.svg",
-    "basePrice": 200,
+    "basePrice": 45,
     "sizeUpcharge": 65,
     "stock": 6
   },
   {
-    "id": "oat-honey",
-    "name": "Oat & Honey Scrub",
-    "description": "A soothing, low-irritation blend for sensitive skin, with fine oats and real honey.",
-    "image": "images/oat-honey.svg",
-    "basePrice": 185,
-    "sizeUpcharge": 55,
-    "stock": 17
-  }
-]
+   
