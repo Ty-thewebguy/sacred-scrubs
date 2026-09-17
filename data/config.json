@@ -1,3 +1,4 @@
+[
 {
   "applications": ["Hand", "Foot"],
   "formEndpoints": {
@@ -7,3 +8,4 @@
   "businessName": "Sacred Scrubs",
   "businessTagline": "Magical natural scrubs for hands and feet"
 }
+]
