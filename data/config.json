@@ -1,6 +1,6 @@
 {
-  "flavors": ["Strawberry", "Kiwi", "Coconut", "Lavender", "Rose", "Vanilla", "Green Tea", "Citrus"],
-  "sizes": ["100g", "250g"],
+  "flavors": ["current"],
+  "sizes": ["250ml"],
   "applications": ["Hand", "Foot"],
   "formEndpoints": {
     "orders": "https://formspree.io/f/xzezpenw",
