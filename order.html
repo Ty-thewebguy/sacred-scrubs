@@ -43,6 +43,7 @@
   <script src="js/main.js"></script>
   <script>
     let config;
+    const DELIVERY_FEE = 140;
 
     async function init() {
       config = await loadConfig();
@@ -59,6 +60,8 @@
         return;
       }
 
+      const grandTotal = cartTotal() + DELIVERY_FEE;
+
       root.innerHTML = `
         <div class="order-layout">
           <form id="order-form">
@@ -68,8 +71,8 @@
             </div>
 
             <div class="form-field full">
-              <label for="address">Delivery / collection address</label>
-              <textarea id="address" name="address" rows="3" required></textarea>
+              <label for="address">Paxi pickup point (store name & address)</label>
+              <textarea id="address" name="address" rows="3" required placeholder="e.g. PEP Store, Main Street Mall"></textarea>
             </div>
 
             <div class="form-grid">
@@ -108,20 +111,25 @@
             <h3>Order summary</h3>
             ${cart.map(item => `
               <div class="order-summary-line">
-                <span>${item.name} (${item.flavor}, ${item.size}, ${item.application}) × ${item.qty}</span>
+                <span>${item.name}${item.application ? " (" + item.application + ")" : ""} × ${item.qty}</span>
                 <span>${formatPrice(item.qty * item.unitPrice)}</span>
               </div>
             `).join("")}
-            <div class="order-summary-total"><span>Total</span><span>${formatPrice(cartTotal())}</span></div>
+            <div class="order-summary-line">
+              <span>Paxi delivery (fixed fee)</span>
+              <span>${formatPrice(DELIVERY_FEE)}</span>
+            </div>
+            <div class="order-summary-total"><span>Total</span><span>${formatPrice(grandTotal)}</span></div>
           </div>
         </div>
       `;
 
       const cartLines = cart.map(item =>
-        `${item.name} (${item.flavor}, ${item.size}, ${item.application}) x${item.qty} — ${formatPrice(item.qty * item.unitPrice)}`
+        `${item.name}${item.application ? " (" + item.application + ")" : ""} x${item.qty} — ${formatPrice(item.qty * item.unitPrice)}`
       ).join("\n");
-      document.getElementById("order_summary").value = cartLines;
-      document.getElementById("order_total").value = formatPrice(cartTotal());
+      const fullSummary = cartLines + `\nPaxi delivery (fixed fee) — ${formatPrice(DELIVERY_FEE)}`;
+      document.getElementById("order_summary").value = fullSummary;
+      document.getElementById("order_total").value = formatPrice(grandTotal);
 
       document.getElementById("order-form").addEventListener("submit", handleSubmit);
     }
@@ -168,3 +176,4 @@
   </script>
 </body>
 </html>
+  
