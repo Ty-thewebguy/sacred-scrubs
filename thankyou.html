@@ -31,6 +31,17 @@
       </div>
       <h1 id="confirm-title">Thank you</h1>
       <p id="confirm-text">We've received what you sent.</p>
+
+      <div id="payment-info-block" style="display:none; background:var(--green-pale); border-radius:16px; padding:18px 20px; margin:20px 0; text-align:left;">
+        <p style="margin:0 0 6px; font-weight:700; color:var(--green-deep);">EFT payment details</p>
+        <p style="margin:0; font-size:0.92rem; line-height:1.7;">
+          Account name: Ms. Sinden<br />
+          Bank: Capitec<br />
+          Account number: 1253394022
+        </p>
+        <p style="margin:10px 0 0; font-size:0.85rem; color:var(--text-muted);">Please note: products are only dispatched once payment has been received.</p>
+      </div>
+
       <a href="catalogue.html" class="btn btn-primary" style="margin-top:12px;">Back to the catalogue</a>
     </div>
   </main>
@@ -51,6 +62,7 @@
       document.getElementById("confirm-title").textContent = "Order received";
       document.getElementById("confirm-text").textContent = "Thank you — your order has been sent. We'll be in touch shortly to confirm payment and delivery details.";
       document.title = "Order received — Sacred Scrubs";
+      document.getElementById("payment-info-block").style.display = "block";
     }
   </script>
 </body>
